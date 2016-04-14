@@ -7,6 +7,7 @@ import org.joda.time.DateTime;
 import org.junit.Test;
 import org.vertx.java.core.Handler;
 import org.vertx.java.platform.Verticle;
+import org.vertx.testtools.TestVerticle;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -15,18 +16,24 @@ import java.util.Locale;
 /**
  * Created by Carlos Perez on 14/04/2016.
  */
-public class TestVertxScheduler extends Verticle {
+public class TestVertxScheduler extends TestVerticle {
+    public static final int MS_IN_SECOND = 1000;
+    public static final int MS_IN_MINUTE = 60*MS_IN_SECOND;
+    public static final int MS_IN_HOUR = 60*MS_IN_MINUTE;
+    public static final int MS_IN_DAY = 24*MS_IN_HOUR;
+
     @Test
     public void testTimer(){
         Scheduler scheduler = Scheduler.create(vertx);
         final ArrayList<DateTime> Hours = new ArrayList<DateTime>();
-        Hours.add(new DateTime().withTime(16, 24, 0, 0));
-        Hours.add(new DateTime().withTime(16, 25, 59, 0));
+        Hours.add(new DateTime().withTime(12, 01, 0, 0));
+        Hours.add(new DateTime().withTime(12, 02, 00, 0));
+        /*
         vertx.setPeriodic(MS_IN_MINUTE, new Handler<Long>() { //Por default, cada 24 horas (a partir de cuando se hace el deploy) se va a invocar la función setScheduler y se van a reprogramar los eventos.
             public void handle(Long timerID) {
-                setScheduler(log);
+                System.out.println("Every minute");
             }
-        });
+        });*/
         try {
             for (int i = 0; i <= Hours.size() - 1; i++) {
                 final int finalI = i;

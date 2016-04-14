@@ -24,7 +24,7 @@ public class Utils {
         long diffInMillis = c.getMillis() - currentDateTime.getMillis();
         while (diffInMillis < 0) {
             c = c.plusDays(1);
-            System.out.println("Agendando evento hacia el siguiente día: " + c.toDate().toString());
+            System.out.println("To next day: " + c.toDate().toString());
             diffInMillis = c.getMillis() - currentDateTime.getMillis();
         }
 
