@@ -1,4 +1,4 @@
-package com.sendgrid.labs.vertx.schedule;
+package com.sendgrid.labs.vertx.schedule.impl;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -6,14 +6,9 @@ import java.util.*;
 
 import org.joda.time.DateTime;
 
-class EventInfo {
-    public Date date;
-    public boolean isDstAheadHour;
-    public boolean isDstBackHour1;
-    public boolean isDstBackHour2;
-};
 
-class WeekTracker {
+
+public class WeekTracker {
     private DateTime calendarDate;
     public WeekTracker(TimeZone tz, Date start, int weekMs) {
         calendar = Calendar.getInstance(tz);

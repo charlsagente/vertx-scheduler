@@ -1,4 +1,4 @@
-package com.sendgrid.labs.vertx.schedule;
+package com.sendgrid.labs.vertx.schedule.unit;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -9,6 +9,7 @@ import java.util.TimeZone;
 
 import com.sendgrid.labs.vertx.schedule.TimeOfWeek.DstAheadBehavior;
 import com.sendgrid.labs.vertx.schedule.TimeOfWeek.DstBackBehavior;
+import com.sendgrid.labs.vertx.schedule.impl.*;
 
 import org.junit.Assert;
 import org.junit.Test;

@@ -1,13 +1,16 @@
-package com.sendgrid.labs.vertx.schedule;
+package com.sendgrid.labs.vertx.schedule.impl;
 
 import java.util.Date;
 import java.util.HashMap;
 import java.util.TimeZone;
 
+import com.sendgrid.labs.vertx.schedule.Scheduler;
+import com.sendgrid.labs.vertx.schedule.TimeOfWeek;
+import com.sendgrid.labs.vertx.schedule.Timer;
 import org.vertx.java.core.Handler;
 import org.vertx.java.core.Vertx;
 
-class SchedulerImpl extends Scheduler {
+public class SchedulerImpl extends Scheduler {
 
     public SchedulerImpl(Vertx vertx) {
         this.vertx = vertx;

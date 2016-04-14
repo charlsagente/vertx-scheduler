@@ -2,21 +2,26 @@
 
 A module to implement scheduling on top of Vertx timers.
 
-Initially this includes a weekly schedule with configurable behavior on DST changes.
+
 
 ## Installation
-
-    ...
-    dependencies {
-      ...
-      compile "com.sendgrid.labs:vertx-scheduler:$schedulerVersion"
-    }
-
-    repositories {
-      mavenCentral()
-    }
-    ...
-
+* Clone this repository
+* Inside the vertx-scheduler folder, from terminal type:
+		gradlew install 
+	
+	* Ths will install any jars produced to the local Maven repository (.m2).
+	And now add the dependency in your project
+			<dependency>
+				<groupId>com.sendgrid.labs</groupId>
+				<artifactId>vertx-scheduler</artifactId>
+				<version>0.3.1</version>
+			</dependency>
+* You can also set the createFatJar to true in the gradle.properties file and type:
+		gradlew assemble
+	* And outputs are created in build/libs.
+Check the build.gradle file for more options.
+	
+	
 ## Use
 
 ### Create a new scheduler

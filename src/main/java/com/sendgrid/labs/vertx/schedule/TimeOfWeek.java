@@ -1,6 +1,7 @@
 package com.sendgrid.labs.vertx.schedule;
 
 import java.util.TimeZone;
+import com.sendgrid.labs.vertx.schedule.impl.*;
 
 /**
  * Represents a time of week (i.e. Monday at 7:00 PM in EDT)

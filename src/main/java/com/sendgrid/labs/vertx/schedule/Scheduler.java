@@ -1,7 +1,9 @@
 package com.sendgrid.labs.vertx.schedule;
 
+import com.sendgrid.labs.vertx.schedule.impl.SchedulerImpl;
 import org.vertx.java.core.Handler;
 import org.vertx.java.core.Vertx;
+
 
 /**
  * Interface to schedule/cancel timers

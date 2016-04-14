@@ -1,8 +1,11 @@
-package com.sendgrid.labs.vertx.schedule;
+package com.sendgrid.labs.vertx.schedule.impl;
+
+import com.sendgrid.labs.vertx.schedule.TimeOfWeek;
+import org.joda.time.DateTime;
 
 import java.util.Date;
 
-class Utils {
+public class Utils {
 
     static public int convertWeekTime(TimeOfWeek.Day day, int hour, int minute, int sec, int ms) {
         return days(day_num(day)) + hours(hour) + minutes(minute) + seconds(sec) + ms;
@@ -16,7 +19,18 @@ class Utils {
         return ret;
     }
 
+    static public TimeOfWeek getNextEventTimeInMillis(DateTime c) {
+        DateTime currentDateTime = new DateTime();
+        long diffInMillis = c.getMillis() - currentDateTime.getMillis();
+        while (diffInMillis < 0) {
+            c = c.plusDays(1);
+            System.out.println("Agendando evento hacia el siguiente día: " + c.toDate().toString());
+            diffInMillis = c.getMillis() - currentDateTime.getMillis();
+        }
 
+
+        return TimeOfWeek.create((int) diffInMillis);
+    }
 
     static private int day_num(TimeOfWeek.Day d) {
         switch(d) {
