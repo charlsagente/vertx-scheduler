@@ -2,10 +2,9 @@ package com.sendgrid.labs.vertx.schedule;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.LinkedList;
-import java.util.TimeZone;
+import java.util.*;
+
+import org.joda.time.DateTime;
 
 class EventInfo {
     public Date date;
@@ -15,15 +14,19 @@ class EventInfo {
 };
 
 class WeekTracker {
+    private DateTime calendarDate;
     public WeekTracker(TimeZone tz, Date start, int weekMs) {
         calendar = Calendar.getInstance(tz);
+
         calendar.setLenient(true);
         calendar.setTime(start);
-        calendar.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
-        calendar.set(Calendar.HOUR_OF_DAY, 0);
-        calendar.set(Calendar.MINUTE, 0);
-        calendar.set(Calendar.SECOND, 0);
-        calendar.set(Calendar.MILLISECOND, 0);
+        this.calendarDate= new DateTime(start);
+
+        calendar.set(Calendar.DAY_OF_WEEK,calendarDate.getDayOfWeek());
+        calendar.set(Calendar.HOUR_OF_DAY, calendarDate.getHourOfDay());
+        calendar.set(Calendar.MINUTE, calendarDate.getMinuteOfHour());
+        calendar.set(Calendar.SECOND, calendarDate.getSecondOfMinute());
+        calendar.set(Calendar.MILLISECOND,calendarDate.getMillisOfSecond());
 
         this.weekMs = weekMs;
 
@@ -59,8 +62,11 @@ class WeekTracker {
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         df.setTimeZone(TimeZone.getTimeZone("America/New_York"));
 
-        Calendar event = (Calendar)calendar.clone(); event.add(Calendar.MILLISECOND, weekMs);
-        Calendar event_before = (Calendar)event.clone(); event_before.add(Calendar.MINUTE, -60);
+        Calendar event=this.calendarDate.toCalendar(new Locale("America/New_York"));
+        //Calendar event = (Calendar)calendar.clone();
+        event.add(Calendar.MILLISECOND, weekMs);
+        Calendar event_before = (Calendar)event.clone();
+        event_before.add(Calendar.MINUTE, -60);
         Calendar event_after = (Calendar)event.clone(); event_after.add(Calendar.MINUTE, 60);
 
         int start_of_week_dst_offset = calendar.get(Calendar.DST_OFFSET);
@@ -94,7 +100,7 @@ class WeekTracker {
         } else {
             // not dst hour, but be sure to adjust for dst offset (in case this was a dst week)
             EventInfo e = new EventInfo();
-            event.add(Calendar.MILLISECOND, start_of_week_dst_offset - event_dst_offset);
+            //event.add(Calendar.MILLISECOND, start_of_week_dst_offset - event_dst_offset);
             e.date = event.getTime();
             e.isDstAheadHour = false;
             e.isDstBackHour1 = false;

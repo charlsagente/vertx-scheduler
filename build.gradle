@@ -43,6 +43,7 @@ install - install any jars produced to the local Maven repository (.m2)
  */
 
 dependencies {
+  compile "joda-time:joda-time:2.8.2"
   /*
   Add your module jar dependencies here
   E.g.
